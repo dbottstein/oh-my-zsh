@@ -1,0 +1,23 @@
+chpwd() {
+    svn_branch () {
+        if [[ -d .svn ]]; then
+            local u="$(svn --non-interactive info 2>/dev/null | grep URL)"
+            [[ $u =~ '(trunk)|branches/([^/]*)|tags/([^/]*)' ]] && print $match
+        fi
+    }
+
+    BRANCH="$(svn_branch)"
+    if [[ -n "$BRANCH" ]]; then
+        BRANCH=" ($BRANCH)"
+    fi
+
+    [[ -t 1 ]] || return
+        case $TERM in
+        sun-cmd) print -Pn "\e]l%~\e\\"
+        ;;
+    *xterm*|rxvt|(dt|k|E)term) print -Pn "\e]2;%n@%m:%~${BRANCH}\a"
+        ;;
+    esac
+}
+
+chpwd
