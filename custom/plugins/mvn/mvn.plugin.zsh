@@ -1,4 +1,3 @@
-autoload -U source_omz_plugin
-source_omz_plugin mvn
+source "$ZSH/plugins/mvn/mvn.plugin.zsh"
 
 alias -- war='mvn compile war:exploded'

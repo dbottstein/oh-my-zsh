@@ -1,4 +1,3 @@
-autoload -U source_omz_plugin
-source_omz_plugin git
+source "$ZSH/plugins/git/git.plugin.zsh"
 
 alias -- g+x='git update-index --chmod=+x'
